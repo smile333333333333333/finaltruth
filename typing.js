@@ -61,6 +61,25 @@ async function typeText(text){
 
         addCharacter(letter);
 
+        // Dramatic words
+if(currentText.endsWith("THE FACTORY.\n\n")){
+
+    factoryShake();
+
+}
+
+if(currentText.endsWith("WHY ARE THEY SMILING?\n\n")){
+
+    smileShake();
+
+}
+
+if(currentText.endsWith("WHY DID THEY K-")){
+
+    endingShake();
+
+}
+
         // play typing sound
         if(letter.trim() !== ""){
 
