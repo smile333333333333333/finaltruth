@@ -1,94 +1,79 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Recovered Recording</title>
-<style>
-html,body{margin:0;height:100%;background:#000;color:#00ff66;font-family:Consolas,monospace;overflow:hidden}
-body:before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.04)0 2px,transparent 2px 4px);pointer-events:none;animation:flicker 6s infinite}
-#screen{padding:40px;white-space:pre-wrap;font-size:28px;line-height:1.5}
-.red{color:#ff3030}.shake{animation:shake .08s infinite}
-@keyframes shake{0%{transform:translate(1px,0)}25%{transform:translate(-2px,1px)}50%{transform:translate(2px,-1px)}75%{transform:translate(-1px,2px)}100%{transform:translate(0,0)}}
-@keyframes flicker{50%{opacity:.92}51%{opacity:.75}52%{opacity:1}}
-</style></head><body><div id="screen"></div>
-<script>
-const hum=new (window.AudioContext||window.webkitAudioContext)();
-function beep(f,d){let o=hum.createOscillator(),g=hum.createGain();o.frequency.value=f;o.connect(g);g.connect(hum.destination);g.gain.value=.02;o.start();g.gain.exponentialRampToValueAtTime(.0001,hum.currentTime+d);o.stop(hum.currentTime+d);}
-document.body.onclick=()=>hum.resume();
-const parts=[
-"Hey...\n\n",
-"I see you followed all my clues.\n",
-"You actually made it this far.\n\n",
-"If you're reading this... then everything worked.\n\n",
-"I wish I could tell you what comes next.\n",
-"But I can't.\n\n",
-"They won't tell me.\n",
-"I've searched everywhere.\n",
-"Every answer leads to one place.\n\n",
-"THE FACTORY.\n\n",
-"BUT WHAT IS THE FACTORY?\n\n",
-"WHY ARE THEY SMILING?\n\n",
-"WHAT ARE THEY HIDING?\n\n",
-"WHY DID THEY K-"
-];
-const s=document.getElementById("screen");
-let text="",i=0,j=0;
-function next(){
- if(i>=parts.length){return terminate();}
- let p=parts[i];
- if(j<p.length){
-   text+=p[j];
-   let out=text.replace(/THE FACTORY\.|BUT WHAT IS THE FACTORY\?|WHY ARE THEY SMILING\?|WHY DID THEY K-/g,m=>'<span class="red shake">'+m+"</span>");
-   s.innerHTML=out;
-   if(p[j].trim())beep(800,.01);
-   j++;
-   setTimeout(next,30);
- }else{j=0;i++;setTimeout(next,700);}
-}
-function terminate(){
- s.className="shake";
- setTimeout(()=>{
- s.className="";
- s.textContent=`=========================================
-H.E.E. INTERNAL NOTICE
-=========================================
+<html lang="en">
 
-EMPLOYEE ID: RE
+<head>
 
-STATUS:
-TERMINATED
+<meta charset="UTF-8">
 
-Reason:
-Unauthorized disclosure of restricted information.
+<title>Recovered Recording</title>
 
-All references to Employee RE have been removed.
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-Please return to your assigned duties.
+<link rel="stylesheet" href="style.css">
 
-Remember:
+</head>
 
-A happy employee is a productive employee.
+<body>
 
-:)`;
- setTimeout(()=>{
- s.className="shake";
- s.textContent="RE WAS CORRECT.";
- setTimeout(()=>{
- s.className="";
- s.textContent=`=========================================
-H.E.E. INTERNAL NOTICE
-=========================================
+<!-- CRT Glow -->
 
-EMPLOYEE ID: RE
+<div id="crt"></div>
 
-STATUS: TERMINATED
+<!-- Scanlines -->
 
-Reason:
-Unauthorized disclosure of restricted information.
+<div id="scanlines"></div>
 
-A happy employee is a productive employee.
+<!-- Static -->
 
-:)`;
- },180);
- },2500);
- },400);
-}
-setTimeout(next,1000);
-</script></body></html>
+<div id="static"></div>
+
+<!-- Flash -->
+
+<div id="flash"></div>
+
+<!-- Main Container -->
+
+<div id="container">
+
+<div id="screen">
+
+<pre id="text"></pre>
+
+</div>
+
+</div>
+
+<!-- Hidden Easter Egg -->
+
+<div id="secret">
+
+RE WAS CORRECT.
+
+</div>
+
+<!-- Audio -->
+
+<audio
+id="typingSound"
+preload="auto">
+<source src="sounds/typing.wav">
+</audio>
+
+<audio
+id="glitchSound"
+preload="auto">
+<source src="sounds/glitch.wav">
+</audio>
+
+<audio
+id="hum"
+loop
+autoplay>
+<source src="sounds/hum.mp3">
+</audio>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
