@@ -1,0 +1,520 @@
+/* ===========================
+   H.E.E. FINAL MESSAGE
+   style.css
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    background:#000;
+
+    color:#00ff66;
+
+    font-family:Consolas, monospace;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    min-height:100vh;
+
+}
+
+/* =========================== */
+
+#container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    padding:50px;
+
+}
+
+#screen{
+
+    width:900px;
+
+    max-width:95%;
+
+    min-height:100vh;
+
+    font-size:28px;
+
+    line-height:1.6;
+
+    white-space:pre-wrap;
+
+    text-shadow:
+        0 0 6px #00ff66,
+        0 0 12px #00ff66;
+
+}
+
+/* =========================== */
+
+pre{
+
+    white-space:pre-wrap;
+
+    word-wrap:break-word;
+
+}
+
+/* =========================== */
+/* CRT Glow */
+/* =========================== */
+
+#crt{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(
+
+ellipse at center,
+
+rgba(255,255,255,.06),
+
+rgba(0,0,0,.6)
+
+);
+
+mix-blend-mode:screen;
+
+z-index:100;
+
+}
+
+/* =========================== */
+/* Scanlines */
+/* =========================== */
+
+#scanlines{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+pointer-events:none;
+
+background:
+
+repeating-linear-gradient(
+
+to bottom,
+
+rgba(255,255,255,.05) 0px,
+
+rgba(255,255,255,.05) 2px,
+
+transparent 2px,
+
+transparent 4px
+
+);
+
+opacity:.22;
+
+animation:scanMove 6s linear infinite;
+
+z-index:101;
+
+}
+
+@keyframes scanMove{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+100%{
+
+transform:translateY(4px);
+
+}
+
+}
+
+/* =========================== */
+/* Screen Flicker */
+/* =========================== */
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:white;
+
+opacity:0;
+
+pointer-events:none;
+
+animation:flicker 8s infinite;
+
+z-index:102;
+
+}
+
+@keyframes flicker{
+
+0%,94%,100%{
+
+opacity:0;
+
+}
+
+95%{
+
+opacity:.06;
+
+}
+
+96%{
+
+opacity:.01;
+
+}
+
+97%{
+
+opacity:.09;
+
+}
+
+98%{
+
+opacity:0;
+
+}
+
+}
+
+/* =========================== */
+/* Static */
+/* =========================== */
+
+#static{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background-image:url("images/static.png");
+
+background-size:cover;
+
+opacity:0;
+
+pointer-events:none;
+
+z-index:120;
+
+}
+
+.showStatic{
+
+animation:staticFlash .3s;
+
+}
+
+@keyframes staticFlash{
+
+0%{
+
+opacity:0;
+
+}
+
+25%{
+
+opacity:.8;
+
+}
+
+100%{
+
+opacity:0;
+
+}
+
+}
+
+/* =========================== */
+/* Screen Flash */
+/* =========================== */
+
+#flash{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:white;
+
+opacity:0;
+
+pointer-events:none;
+
+z-index:130;
+
+}
+
+.flash{
+
+animation:flash .25s;
+
+}
+
+@keyframes flash{
+
+0%{
+
+opacity:1;
+
+}
+
+100%{
+
+opacity:0;
+
+}
+
+}
+
+/* =========================== */
+/* Red Alert Text */
+/* =========================== */
+
+.red{
+
+color:#ff3333;
+
+text-shadow:
+
+0 0 8px red,
+
+0 0 18px red;
+
+}
+
+/* =========================== */
+/* Screen Shake */
+/* =========================== */
+
+.shake{
+
+animation:shake .08s infinite;
+
+}
+
+@keyframes shake{
+
+0%{
+
+transform:translate(2px,1px);
+
+}
+
+25%{
+
+transform:translate(-2px,-1px);
+
+}
+
+50%{
+
+transform:translate(2px,-2px);
+
+}
+
+75%{
+
+transform:translate(-1px,2px);
+
+}
+
+100%{
+
+transform:translate(0,0);
+
+}
+
+}
+
+/* =========================== */
+/* Cursor */
+/* =========================== */
+
+.cursor{
+
+display:inline-block;
+
+width:10px;
+
+height:28px;
+
+background:#00ff66;
+
+margin-left:4px;
+
+animation:blink .8s infinite;
+
+}
+
+@keyframes blink{
+
+0%,50%{
+
+opacity:1;
+
+}
+
+51%,100%{
+
+opacity:0;
+
+}
+
+}
+
+/* =========================== */
+/* Secret Message */
+/* =========================== */
+
+#secret{
+
+position:fixed;
+
+top:50%;
+
+left:50%;
+
+transform:translate(-50%,-50%);
+
+font-size:64px;
+
+font-weight:bold;
+
+color:red;
+
+opacity:0;
+
+pointer-events:none;
+
+z-index:200;
+
+text-shadow:
+
+0 0 20px red,
+
+0 0 50px red;
+
+}
+
+.showSecret{
+
+animation:secretFlash .2s;
+
+}
+
+@keyframes secretFlash{
+
+0%{
+
+opacity:1;
+
+}
+
+100%{
+
+opacity:0;
+
+}
+
+}
+
+/* =========================== */
+/* Fade Out */
+/* =========================== */
+
+.fade{
+
+animation:fade .6s forwards;
+
+}
+
+@keyframes fade{
+
+to{
+
+opacity:0;
+
+}
+
+}
+
+/* =========================== */
+/* Scrollbar */
+/* =========================== */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#00ff66;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#000;
+
+}
